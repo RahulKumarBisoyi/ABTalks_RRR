@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces — warm cream page background, white/soft-peach cards */
+  --color-ink: #faf5ee;
+  --color-surface: #ffffff;
+  --color-surface-raised: #fdf1e4;
+  --color-line: #ece1d3;
+  --color-line-bright: #ddccb6;
+
+  /* Text — warm dark brown, never pure black */
+  --color-paper: #2b1d12;
+  --color-muted: #8a7862;
+  --color-faint: #b6a891;
+
+  /* Accent — warm orange, the primary energetic color in the system */
+  --color-volt: #f2792a;
+  --color-volt-dim: #d9631c;
+  --color-volt-ink: #fffaf5;
+
+  /* Status */
+  --color-flame: #f2792a;
+  --color-flame-hot: #e6551a;
+  --color-miss: #e0654f;
+  --color-ship: #3fa876;
+
+  /* Secondary accents used sparingly for variety (badges, stat cards) */
+  --color-cyan: #4fb0c4;
+  --color-purple: #9584d1;
+
+  /* Pastel supporting accents — the richer color system layered on top of
+     the cream/white/orange base. Each is used for small, specific pieces
+     of information (icon circles, badges, tags, ranks), never as large
+     solid blocks. */
+  --color-yellow: #e0a526;
+  --color-mint: #43c497;
+  --color-blue: #5b8def;
+  --color-lavender: #a996e0;
+  --color-peach: #ef9c72;
+  --color-pink: #e87fa3;
+
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --radius-mission: 16px;
+}
+
+html {
+  background: var(--color-ink);
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-line-bright); border-radius: 4px; }
+
+:focus-visible {
+  outline: 2px solid var(--color-volt);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Soft warm glow — used sparingly on the flame/streak motif, no neon */
+.flame-glow {
+  filter: drop-shadow(0 0 5px rgba(242, 121, 42, 0.35));
+}
+
+.volt-glow {
+  filter: drop-shadow(0 2px 6px rgba(242, 121, 42, 0.25));
+}
+
+/* Subtle card elevation — soft, not a heavy floating-card shadow */
+.card-shadow {
+  box-shadow: 0 1px 2px rgba(43, 29, 18, 0.04), 0 6px 16px rgba(43, 29, 18, 0.05);
+}
+
+/* Soft ambient gradient glow for hero sections */
+.warm-glow {
+  background: radial-gradient(circle, rgba(242, 121, 42, 0.16), transparent 70%);
+}
+
+/* Subtle gradient fills for progress bars — used sparingly, per section */
+.gradient-fill-orange {
+  background: linear-gradient(90deg, var(--color-volt), #ffab6b);
+}
+
+.gradient-fill-green {
+  background: linear-gradient(90deg, var(--color-ship), #8fe0b8);
+}
+
+.gradient-fill-cyan {
+  background: linear-gradient(90deg, var(--color-cyan), #8fd9e8);
+}
+
+.gradient-fill-mint {
+  background: linear-gradient(90deg, var(--color-mint), #94e8cb);
+}
+
+.gradient-fill-blue {
+  background: linear-gradient(90deg, var(--color-blue), #a4c1f7);
+}
+
+.gradient-fill-yellow {
+  background: linear-gradient(90deg, var(--color-yellow), #f2cf7d);
+}
+
+.gradient-fill-lavender-blue {
+  background: linear-gradient(90deg, var(--color-lavender), var(--color-blue));
+}
+
+/* The one deliberately-special CTA accent (Ship Your Work / Complete
+   Mission) — everything else stays solid orange per the "don't make every
+   button colorful" rule. */
+.gradient-cta-cyan {
+  background: linear-gradient(90deg, #2fb8cf, #4fd0e0);
+}
+
+/* Subtle, professional "just completed" entrance — not confetti, just a
+   quick settle so the completion state feels acknowledged, not sudden. */
+@keyframes mission-celebrate {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.mission-celebrate {
+  animation: mission-celebrate 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
